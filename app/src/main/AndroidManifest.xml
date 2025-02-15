@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MAPD721_A2_DeepuAjay"
         tools:targetApi="31">
         <activity
+            android:name=".HealthConnect"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
