@@ -63,7 +63,7 @@ fun HealthDataScreen(
             OutlinedTextField(
                 value = dateTimeInput,
                 onValueChange = { dateTimeInput = it },
-                label = { Text("Date/Time (yyyy-MM-dd HH:mm)") },
+                label = { Text("Date/Time (YYYY-MM-DD HH:mm)") },
                 modifier = Modifier.fillMaxWidth()
             )
 
