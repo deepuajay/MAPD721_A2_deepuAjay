@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -35,8 +32,16 @@ fun HealthDataScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(30.dp)
+                .padding(30.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(
+                text = "Health Connect App",
+                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             OutlinedTextField(
                 value = heartRateInput,
                 onValueChange = {
@@ -47,11 +52,12 @@ fun HealthDataScreen(
                 modifier = Modifier.fillMaxWidth(),
                 isError = validationMessage.isNotEmpty()
             )
+
             if (validationMessage.isNotEmpty()) {
                 Text(validationMessage, color = Color.Red, style = TextStyle(fontSize = 14.sp))
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = dateTimeInput,
@@ -60,15 +66,16 @@ fun HealthDataScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Button(
                     onClick = onLoadData,
-                    modifier = Modifier.padding(8.dp).height(50.dp)
+                    modifier = Modifier.weight(1f).height(50.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6200EE))
                 ) {
                     Text("Load", fontSize = 18.sp)
                 }
@@ -78,17 +85,23 @@ fun HealthDataScreen(
                             onSaveData(heartRateInput, dateTimeInput)
                         }
                     },
-                    modifier = Modifier.padding(8.dp).height(50.dp)
+                    modifier = Modifier.weight(1f).height(50.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
                 ) {
                     Text("Save", fontSize = 18.sp)
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            Text("Heart Rate History", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
+            Text(
+                "Heart Rate History",
+                style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            )
 
-            Box(modifier = Modifier.weight(1f).padding(vertical = 8.dp)) {
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Box(modifier = Modifier.weight(1f)) {
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(heartRateRecords) { record ->
                         Text(
