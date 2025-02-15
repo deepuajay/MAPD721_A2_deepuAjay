@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.border
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -104,10 +105,28 @@ fun HealthDataScreen(
             Box(modifier = Modifier.weight(1f)) {
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(heartRateRecords) { record ->
-                        Text(
-                            "${record.second} - ${record.first}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp)
+                                .border(2.dp, Color.Black)
+                                .background(Color.White)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = "Heart Rate: ${record.second}",
+                                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                )
+                                Text(
+                                    text = "Checked on: ${record.first}",
+                                    style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Normal)
+                                )
+                            }
+                        }
                         Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
